@@ -17,5 +17,3 @@ nodes:
         protocol: TCP
       - containerPort: 31444 # Kargo dashboard
         hostPort: 31444
-      - containerPort: 31443 # Argo CD dashboard
-        hostPort: 31443

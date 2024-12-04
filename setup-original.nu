@@ -44,20 +44,10 @@ let ingress_data = apply_ingress kind nginx
 apply_certmanager
 
 (
-    helm install argocd argo-cd 
+    helm upgrade --install argocd argo-cd
         --repo https://argoproj.github.io/argo-helm
-        --version 7.7.5
-        --namespace argocd
-        --create-namespace
-        --set 'configs.secret.argocdServerAdminPassword=$2a$10$5vm8wXaSdbuff0m9l21JdevzXBzJFPCi8sy6OOnpZMAG.fOXL7jvO'
-        --set dex.enabled=false
-        --set notifications.enabled=false
-        --set server.service.type=NodePort
-        --set server.service.nodePortHttp=31443
-        --set server.extensions.enabled=true
-        --set 'server.extensions.contents[0].name=argo-rollouts' 
-        --set 'server.extensions.contents[0].url=https://github.com/argoproj-labs/rollout-extension/releases/download/v0.3.3/extension.tar'
-        --wait
+        --namespace argocd --create-namespace
+        --values argocd-values.yaml --wait
 )
 
 (
